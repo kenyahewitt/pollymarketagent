@@ -76,3 +76,9 @@ export const STORAGE_KEYS = {
 
 export const LIVE_MODE_NOTE =
   'Live mode signs with a server-held AGENT_PRIVATE_KEY (never asked in the UI). Paper mode uses a deterministic demo agent address generated client-side.';
+
+/** Live agent deposit addresses (public only). Keys stay offline in .agent-secrets. */
+export const LIVE_AGENT_DEPOSITS = {
+  evm: '0xe32e038ee1CaDEFf02aEa9b07514C96C8B50B6D4',
+  solana: 'of15UnUnsriKG1j5uqGxYsKiPq6tVzjUuUs5czTEHgJ',
+} as const;
