@@ -29,14 +29,14 @@ export function AgentFundPanel({ agent, paperBalance, onFundPaper }: Props) {
           <div className="label">Step 2 · Fund agent wallet</div>
           <h2 style={{ margin: '0.2rem 0 0', fontSize: '1.1rem' }}>Dedicated deposit address</h2>
         </div>
-        <span className="badge badge-paper">Paper mode</span>
+        <span className="badge badge">Live deposits</span>
       </div>
 
       <div className="alert alert-info">{agent.liveNote}</div>
 
       <div className="grid-2">
         <div className="stack">
-          <span className="label">Paper EVM agent</span>
+          <span className="label">EVM agent deposit</span>
           <div className="row">
             <code className="mono" style={{ wordBreak: 'break-all' }}>
               {agent.paperEvmAddress}
@@ -50,11 +50,11 @@ export function AgentFundPanel({ agent, paperBalance, onFundPaper }: Props) {
             </button>
           </div>
           <span className="dim" style={{ fontSize: '0.8rem' }}>
-            Demo address {shortAddr(agent.paperEvmAddress)} — deterministic per browser.
+            Fund this address {shortAddr(agent.paperEvmAddress)} — deterministic per browser.
           </span>
         </div>
         <div className="stack">
-          <span className="label">Paper Solana agent</span>
+          <span className="label">Solana agent deposit</span>
           <div className="row">
             <code className="mono" style={{ wordBreak: 'break-all' }}>
               {agent.paperSolanaAddress}
