@@ -1,5 +1,5 @@
 import type { AgentWallet } from '../types';
-import { LIVE_MODE_NOTE, STORAGE_KEYS } from './constants';
+import { LIVE_AGENT_DEPOSITS, LIVE_MODE_NOTE, STORAGE_KEYS } from './constants';
 import { loadJson, saveJson } from './storage';
 
 /** Simple deterministic hex from a seed string (demo only — not a real key derivation). */
@@ -54,16 +54,20 @@ function createAgentWallet(): AgentWallet {
   if (!storedSeed) saveJson(STORAGE_KEYS.agent + '_seed', finalSeed);
 
   return {
-    paperEvmAddress: '0x' + hashToHex(finalSeed + ':evm', 40),
-    paperSolanaAddress: hashToBase58(finalSeed + ':sol', 44),
-    liveNote: LIVE_MODE_NOTE,
+    paperEvmAddress: LIVE_AGENT_DEPOSITS.evm,
+    paperSolanaAddress: LIVE_AGENT_DEPOSITS.solana,
+    liveNote: LIVE_MODE_NOTE + ' Deposit only to the addresses shown. Agent keys are not in the browser.',
   };
 }
 
 export function getOrCreateAgentWallet(): AgentWallet {
   const existing = loadJson<AgentWallet | null>(STORAGE_KEYS.agent, null);
   if (existing?.paperEvmAddress && existing?.paperSolanaAddress) {
-    return { ...existing, liveNote: LIVE_MODE_NOTE };
+    return {
+      paperEvmAddress: LIVE_AGENT_DEPOSITS.evm,
+      paperSolanaAddress: LIVE_AGENT_DEPOSITS.solana,
+      liveNote: LIVE_MODE_NOTE + ' Deposit only to the addresses shown. Agent keys are not in the browser.',
+    };
   }
   const created = createAgentWallet();
   saveJson(STORAGE_KEYS.agent, created);
